@@ -10,7 +10,7 @@
 <header>
   <div class="header-row">
     <h1>🔐 Auth API JWT</h1>
-    <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
+    <button id="themeToggle" class="icon-btn">🌙</button>
   </div>
 
   <p>Java • Spring Boot • JWT • Security</p>
@@ -39,11 +39,21 @@
 
 </main>
 
-<!-- Chatbot -->
+<!-- CHATBOT -->
 <div id="chatbot">
+
   <div id="chatWindow">
-    <div class="msg bot">Hi! 👋 Click me if you have questions.</div>
+    <div class="msg bot pop">Hi! I’m JWT Buddy ❓</div>
+    <div class="msg bot pop">What do you want to know?</div>
+
+    <div class="options">
+      <button onclick="ask('jwt')">What is JWT?</button>
+      <button onclick="ask('login')">How does login work?</button>
+      <button onclick="ask('security')">Is this secure?</button>
+      <button onclick="ask('stack')">Which technologies?</button>
+    </div>
   </div>
+
   <img src="assets/bot.svg" onclick="toggleChat()" />
 </div>
 

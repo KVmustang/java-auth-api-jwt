@@ -1,88 +1,58 @@
 const API = "http://localhost:8080";
 
 const tokenBadge = document.getElementById("tokenBadge");
+const authBadge = document.getElementById("authBadge");
 const apiBadge = document.getElementById("apiBadge");
 
-function setToken(cls, text){
-  tokenBadge.className = "badge " + cls;
-  tokenBadge.textContent = "Token: " + text;
-}
-
-function setApi(cls, text){
-  apiBadge.className = "badge " + cls;
-  apiBadge.textContent = "API: " + text;
-}
-
-function withLoading(btn, action){
-  btn.classList.add("loading");
-  btn.innerHTML += `<span class="spinner"></span>`;
-
-  return action().finally(()=>{
-    btn.classList.remove("loading");
-    btn.innerHTML = btn.innerHTML.replace(/<span.*<\/span>/,'');
-  });
+function setBadge(el, cls, text){
+  el.className = "badge " + cls;
+  el.textContent = text;
 }
 
 function login(){
-  const btn = event.target;
-  setApi("warn","authenticating");
-
-  return withLoading(btn, () =>
-    fetch(`${API}/api/auth/login`, {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        username:username.value,
-        password:password.value
-      })
+  fetch(`${API}/api/auth/login`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      username:username.value,
+      password:password.value
     })
-    .then(r=>{
-      if(!r.ok) throw Error();
-      return r.json();
-    })
-    .then(d=>{
-      localStorage.setItem("token", d.token);
-      loginResult.textContent = "✅ Logged in";
-      setToken("ok","set");
-      setApi("ok","ready");
-    })
-    .catch(()=>{
-      loginResult.textContent = "❌ Invalid credentials";
-      setToken("err","invalid");
-      setApi("err","error");
-    })
-  );
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    localStorage.setItem("token", d.token);
+    loginResult.textContent = "Logged in ✔";
+    setBadge(tokenBadge,"ok","Token: set");
+    decodeToken(d.token);
+  });
 }
 
 function loadProfile(){
-  const btn = event.target;
-  setApi("warn","requesting");
-
-  return withLoading(btn, () =>
-    fetch(`${API}/api/user/profile`, {
-      headers:{
-        Authorization:"Bearer " + localStorage.getItem("token")
-      }
-    })
-    .then(r=>{
-      if(!r.ok) throw Error();
-      return r.text();
-    })
-    .then(t=>{
-      profileResult.textContent = t;
-      setApi("ok","authorized");
-    })
-    .catch(()=>{
-      profileResult.textContent = "Unauthorized";
-      setApi("err","unauthorized");
-    })
-  );
+  fetch(`${API}/api/user/profile`,{
+    headers:{ Authorization:"Bearer "+localStorage.getItem("token") }
+  })
+  .then(r=>{
+    if(!r.ok) throw Error();
+    setBadge(authBadge,"ok","Auth: authorized");
+    return r.text();
+  })
+  .then(t=> profileResult.textContent = t)
+  .catch(()=>{
+    setBadge(authBadge,"err","Auth: unauthorized");
+    profileResult.textContent = "401 Unauthorized";
+  });
 }
 
-// INIT
+/* ==== JWT DECODE (CLIENT SIDE) ==== */
+function decodeToken(token){
+  const parts = token.split(".");
+  const header = JSON.parse(atob(parts[0]));
+  const payload = JSON.parse(atob(parts[1]));
+
+  jwtHeader.textContent = JSON.stringify(header,null,2);
+  jwtPayload.textContent = JSON.stringify(payload,null,2);
+}
+
 if(localStorage.getItem("token")){
-  setToken("ok","set");
-}else{
-  setToken("muted","not set");
+  setBadge(tokenBadge,"ok","Token: set");
 }
-setApi("muted","idle");

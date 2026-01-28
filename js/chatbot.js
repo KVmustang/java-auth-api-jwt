@@ -1,27 +1,32 @@
 let open = false;
 
-function toggleChat() {
+function toggleChat(){
   open = !open;
-  document.getElementById("chatWindow").style.display = open ? "block" : "none";
-  if (open) explain();
+  chatWindow.style.display = open ? "block" : "none";
+
+  if(open){
+    explain();
+  }
 }
 
-function explain() {
-  const chat = document.getElementById("chatWindow");
-  const msgs = [
-    "This project demonstrates a JWT authentication flow.",
-    "The backend is built with Java and Spring Boot.",
-    "Login generates a JWT token.",
-    "Protected routes require the token.",
-    "Frontend is hosted on GitHub Pages 🚀"
+function explain(){
+  chatWindow.innerHTML = "";
+
+  const messages = [
+    "I’m JWT Buddy ❓",
+    "This project demonstrates JWT authentication.",
+    "Backend: Java + Spring Boot.",
+    "Login generates a token.",
+    "Protected routes require Bearer token.",
+    "Frontend runs on GitHub Pages 🚀"
   ];
 
-  msgs.forEach((m,i) => {
-    setTimeout(() => {
+  messages.forEach((msg,i)=>{
+    setTimeout(()=>{
       const div = document.createElement("div");
       div.className = "msg bot";
-      div.innerText = m;
-      chat.appendChild(div);
-    }, i * 800);
+      div.textContent = msg;
+      chatWindow.appendChild(div);
+    }, i * 700);
   });
 }

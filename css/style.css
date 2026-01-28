@@ -1,4 +1,4 @@
-/* ================= THEMES ================= */
+/* ========== THEMES ========== */
 :root[data-theme="dark"]{
   --bg:#0f172a;
   --card:#111827;
@@ -6,8 +6,6 @@
   --secondary:#22c55e;
   --text:#e5e7eb;
   --muted:#94a3b8;
-  --danger:#ef4444;
-  --warn:#f59e0b;
 }
 
 :root[data-theme="light"]{
@@ -17,100 +15,78 @@
   --secondary:#16a34a;
   --text:#0f172a;
   --muted:#64748b;
-  --danger:#dc2626;
-  --warn:#d97706;
 }
 
-/* ================= BASE ================= */
+/* ========== BASE ========== */
 *{
   box-sizing:border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family:"Segoe UI",system-ui,sans-serif;
 }
 
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  transition: background .25s ease, color .25s ease;
+  transition:.25s;
 }
 
-/* ================= HEADER ================= */
+/* ========== HEADER ========== */
 header{
   padding:40px 20px;
   text-align:center;
 }
 
 .header-row{
+  max-width:900px;
+  margin:0 auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  max-width:900px;
-  margin:0 auto;
 }
 
 .status-row{
   display:flex;
-  gap:10px;
   justify-content:center;
-  margin-top:12px;
+  gap:10px;
+  margin-top:10px;
 }
 
-/* ================= BADGES ================= */
+/* ========== BADGES ========== */
 .badge{
   padding:6px 12px;
   border-radius:999px;
-  font-size:12px;
   background:var(--card);
-  border:1px solid rgba(0,0,0,.08);
+  font-size:12px;
+  color:var(--muted);
 }
 
-.badge.ok{color:var(--secondary);}
-.badge.err{color:var(--danger);}
-.badge.warn{color:var(--warn);}
-.badge.muted{color:var(--muted);}
-
-/* ================= BUTTONS ================= */
-.icon-btn{
-  background:none;
-  border:none;
-  font-size:22px;
-  cursor:pointer;
-  transition:transform .2s ease;
-}
-.icon-btn:hover{
-  transform:rotate(-10deg) scale(1.1);
-}
-
+/* ========== BUTTONS ========== */
 button{
-  width:100%;
   padding:10px;
+  border:none;
+  border-radius:10px;
   background:var(--primary);
   color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
   font-weight:bold;
-  transition:background .2s ease;
+  cursor:pointer;
+  transition:transform .1s ease, background .2s ease;
 }
+
 button:hover{
   background:var(--secondary);
 }
 
-input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:8px;
-  border:none;
+button:active{
+  transform:scale(.92) rotate(-1deg);
 }
 
-/* ================= LAYOUT ================= */
+/* ========== LAYOUT ========== */
 .container{
   display:flex;
   gap:30px;
   justify-content:center;
   flex-wrap:wrap;
-  padding-bottom:80px;
+  padding-bottom:100px;
 }
 
 .card{
@@ -123,32 +99,19 @@ input{
 }
 
 @keyframes fadeUp{
-  from{opacity:0; transform:translateY(10px);}
+  from{opacity:0; transform:translateY(12px);}
   to{opacity:1; transform:translateY(0);}
 }
 
-/* ================= LOADING ================= */
-.loading{
-  opacity:.6;
-  pointer-events:none;
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
 }
 
-.spinner{
-  display:inline-block;
-  width:14px;
-  height:14px;
-  border:2px solid white;
-  border-top-color:transparent;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin-left:6px;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg);}
-}
-
-/* ================= CHATBOT ================= */
+/* ========== CHATBOT ========== */
 #chatbot{
   position:fixed;
   bottom:20px;
@@ -166,25 +129,57 @@ input{
 
 #chatWindow{
   display:none;
-  width:260px;
+  width:280px;
   background:var(--card);
-  padding:14px;
-  border-radius:14px;
-  margin-bottom:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:12px;
+  box-shadow:0 15px 30px rgba(0,0,0,.4);
 }
 
 .msg{
   font-size:13px;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .bot{
   color:var(--primary);
 }
 
+.options{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+}
+
+.options button{
+  background:transparent;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+
+/* ========== ANIMATIONS ========== */
 @keyframes float{
   0%{transform:translateY(0);}
   50%{transform:translateY(-10px);}
   100%{transform:translateY(0);}
+}
+
+.pop{
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  0%{transform:scale(.8);}
+  80%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+
+.typing{
+  border-right:2px solid var(--primary);
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  50%{border-color:transparent;}
 }

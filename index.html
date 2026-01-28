@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JWT Auth API Demo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>🔐 Auth API JWT</h1>
+    <p>Java • Spring Boot • JWT • Security</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>Login</h2>
+      <input id="username" placeholder="Username" />
+      <input id="password" type="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <p id="loginResult"></p>
+    </section>
+
+    <section class="card">
+      <h2>Protected Endpoint</h2>
+      <button onclick="loadProfile()">Access Profile</button>
+      <pre id="profileResult"></pre>
+    </section>
+
+  </main>
+
+  <!-- Chatbot -->
+  <div id="chatbot">
+    <img src="assets/bot.svg" onclick="toggleChat()" />
+    <div id="chatWindow">
+      <div class="msg bot">Hi! 👋 Want to know how this project works?</div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

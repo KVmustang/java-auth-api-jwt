@@ -7,39 +7,49 @@
 </head>
 <body>
 
-  <header>
+<header>
+  <div class="header-row">
     <h1>🔐 Auth API JWT</h1>
-    <p>Java • Spring Boot • JWT • Security</p>
-  </header>
-
-  <main class="container">
-
-    <section class="card">
-      <h2>Login</h2>
-      <input id="username" placeholder="Username" />
-      <input id="password" type="password" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <p id="loginResult"></p>
-    </section>
-
-    <section class="card">
-      <h2>Protected Endpoint</h2>
-      <button onclick="loadProfile()">Access Profile</button>
-      <pre id="profileResult"></pre>
-    </section>
-
-  </main>
-
-  <!-- Chatbot -->
-  <div id="chatbot">
-    <img src="assets/bot.svg" onclick="toggleChat()" />
-    <div id="chatWindow">
-      <div class="msg bot">Hi! 👋 Want to know how this project works?</div>
-    </div>
+    <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
   </div>
 
-  <script src="js/api.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/chatbot.js"></script>
+  <p>Java • Spring Boot • JWT • Security</p>
+
+  <div class="status-row">
+    <span id="tokenBadge" class="badge muted">Token: not set</span>
+    <span id="apiBadge" class="badge muted">API: idle</span>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username" />
+    <input id="password" type="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="loginResult"></p>
+  </section>
+
+  <section class="card">
+    <h2>Protected Endpoint</h2>
+    <button onclick="loadProfile()">Access Profile</button>
+    <pre id="profileResult"></pre>
+  </section>
+
+</main>
+
+<!-- Chatbot -->
+<div id="chatbot">
+  <div id="chatWindow">
+    <div class="msg bot">Hi! 👋 Click me if you have questions.</div>
+  </div>
+  <img src="assets/bot.svg" onclick="toggleChat()" />
+</div>
+
+<script src="js/ui.js"></script>
+<script src="js/api.js"></script>
+<script src="js/chatbot.js"></script>
+
 </body>
 </html>

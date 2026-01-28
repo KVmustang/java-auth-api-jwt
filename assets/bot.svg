@@ -1,6 +1,4 @@
 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-
-  <!-- Corpo -->
   <path d="
     M100 20
     C140 20 160 45 160 70
@@ -14,22 +12,15 @@
     C140 52 125 40 100 40
     C80 40 65 50 60 65
     L42 60
-    C50 38 72 20 100 20
-    Z
-  "
-  fill="#38bdf8"/>
+    C50 38 72 20 100 20 Z"
+    fill="#38bdf8"/>
 
-  <!-- Olhos -->
   <circle cx="85" cy="70" r="6" fill="#0f172a"/>
   <circle cx="115" cy="70" r="6" fill="#0f172a"/>
 
-  <!-- Boca -->
-  <path d="M90 90 Q100 95 110 90" stroke="#0f172a" stroke-width="4" fill="none"/>
+  <path d="M90 90 Q100 95 110 90"
+        stroke="#0f172a" stroke-width="4" fill="none"/>
 
-  <!-- Ponto -->
   <circle cx="100" cy="170" r="8" fill="#22c55e"/>
-
-  <!-- Brilho -->
   <circle cx="75" cy="35" r="6" fill="#e5e7eb" opacity="0.8"/>
-
 </svg>

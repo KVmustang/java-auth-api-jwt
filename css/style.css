@@ -1,102 +1,190 @@
-:root {
+/* ================= THEMES ================= */
+:root[data-theme="dark"]{
   --bg:#0f172a;
   --card:#111827;
   --primary:#38bdf8;
   --secondary:#22c55e;
   --text:#e5e7eb;
   --muted:#94a3b8;
+  --danger:#ef4444;
+  --warn:#f59e0b;
 }
 
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+:root[data-theme="light"]{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --primary:#2563eb;
+  --secondary:#16a34a;
+  --text:#0f172a;
+  --muted:#64748b;
+  --danger:#dc2626;
+  --warn:#d97706;
 }
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
+/* ================= BASE ================= */
+*{
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-header {
-  text-align: center;
-  padding: 40px;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  transition: background .25s ease, color .25s ease;
 }
 
-.container {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
+/* ================= HEADER ================= */
+header{
+  padding:40px 20px;
+  text-align:center;
 }
 
-.card {
-  background: var(--card);
-  padding: 25px;
-  width: 300px;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.4);
-  transition: transform .3s;
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:900px;
+  margin:0 auto;
 }
 
-.card:hover {
-  transform: translateY(-6px);
+.status-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:12px;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
+/* ================= BADGES ================= */
+.badge{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  background:var(--card);
+  border:1px solid rgba(0,0,0,.08);
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background: var(--primary);
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+.badge.ok{color:var(--secondary);}
+.badge.err{color:var(--danger);}
+.badge.warn{color:var(--warn);}
+.badge.muted{color:var(--muted);}
+
+/* ================= BUTTONS ================= */
+.icon-btn{
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+.icon-btn:hover{
+  transform:rotate(-10deg) scale(1.1);
 }
 
-button:hover {
-  background: var(--secondary);
+button{
+  width:100%;
+  padding:10px;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:background .2s ease;
+}
+button:hover{
+  background:var(--secondary);
 }
 
-/* Chatbot */
-#chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
 }
 
-#chatbot img {
-  width: 70px;
-  cursor: pointer;
-  animation: float 3s ease-in-out infinite;
+/* ================= LAYOUT ================= */
+.container{
+  display:flex;
+  gap:30px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding-bottom:80px;
 }
 
-#chatWindow {
-  display: none;
-  background: var(--card);
-  width: 260px;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+.card{
+  background:var(--card);
+  width:300px;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  animation:fadeUp .4s ease both;
 }
 
-.msg {
-  margin-bottom: 10px;
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-.bot {
-  color: var(--primary);
+/* ================= LOADING ================= */
+.loading{
+  opacity:.6;
+  pointer-events:none;
 }
 
-@keyframes float {
-  0% { transform: translateY(0);}
-  50% { transform: translateY(-10px);}
-  100% { transform: translateY(0);}
+.spinner{
+  display:inline-block;
+  width:14px;
+  height:14px;
+  border:2px solid white;
+  border-top-color:transparent;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin-left:6px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+/* ================= CHATBOT ================= */
+#chatbot{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+}
+
+#chatbot img{
+  width:70px;
+  cursor:pointer;
+  animation:float 3s ease-in-out infinite;
+}
+
+#chatWindow{
+  display:none;
+  width:260px;
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.msg{
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.bot{
+  color:var(--primary);
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
 }

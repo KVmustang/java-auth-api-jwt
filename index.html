@@ -17,43 +17,78 @@
 
   <div class="status-row">
     <span id="tokenBadge" class="badge muted">Token: not set</span>
+    <span id="authBadge" class="badge muted">Auth: unknown</span>
     <span id="apiBadge" class="badge muted">API: idle</span>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- LOGIN -->
   <section class="card">
     <h2>Login</h2>
     <input id="username" placeholder="Username" />
-    <input id="password" type="password" placeholder="Password" />
+    <input id="password" type="password" />
     <button onclick="login()">Login</button>
     <p id="loginResult"></p>
   </section>
 
+  <!-- PROTECTED -->
   <section class="card">
     <h2>Protected Endpoint</h2>
     <button onclick="loadProfile()">Access Profile</button>
     <pre id="profileResult"></pre>
   </section>
 
+  <!-- JWT VISUAL -->
+  <section class="card wide">
+    <h2>JWT Token (Decoded)</h2>
+
+    <div class="jwt-box">
+      <div>
+        <h4>Header</h4>
+        <pre id="jwtHeader">{}</pre>
+      </div>
+      <div>
+        <h4>Payload</h4>
+        <pre id="jwtPayload">{}</pre>
+      </div>
+      <div>
+        <h4>Signature</h4>
+        <pre>••••••••</pre>
+      </div>
+    </div>
+
+    <p class="hint">This decode is client-side, for learning purposes only.</p>
+  </section>
+
+  <!-- FLOW -->
+  <section class="card wide">
+    <h2>JWT Flow</h2>
+
+    <div class="flow">
+      <div class="step">Client<br/>Login</div>
+      <div class="arrow">➡</div>
+      <div class="step">API<br/>Validate</div>
+      <div class="arrow">➡</div>
+      <div class="step">JWT<br/>Issued</div>
+      <div class="arrow">➡</div>
+      <div class="step">Protected<br/>Request</div>
+    </div>
+  </section>
+
 </main>
 
 <!-- CHATBOT -->
 <div id="chatbot">
-
   <div id="chatWindow">
-    <div class="msg bot pop">Hi! I’m JWT Buddy ❓</div>
-    <div class="msg bot pop">What do you want to know?</div>
-
+    <div class="msg bot pop">I can explain JWT security 👇</div>
     <div class="options">
-      <button onclick="ask('jwt')">What is JWT?</button>
-      <button onclick="ask('login')">How does login work?</button>
-      <button onclick="ask('security')">Is this secure?</button>
-      <button onclick="ask('stack')">Which technologies?</button>
+      <button onclick="ask('flow')">Explain JWT flow</button>
+      <button onclick="ask('decode')">Why decode token?</button>
+      <button onclick="ask('401')">What is 401?</button>
     </div>
   </div>
-
   <img src="assets/bot.svg" onclick="toggleChat()" />
 </div>
 

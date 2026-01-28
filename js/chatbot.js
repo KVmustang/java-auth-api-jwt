@@ -1,12 +1,10 @@
 let open = false;
-
 const chatWindow = document.getElementById("chatWindow");
 
 const answers = {
-  jwt: "JWT stands for JSON Web Token. It allows secure, stateless authentication between client and server.",
-  login: "You send username and password. The backend validates them and returns a signed JWT token.",
-  security: "Yes. Passwords are encrypted and endpoints are protected using Spring Security.",
-  stack: "Backend: Java, Spring Boot, JWT. Frontend: HTML, CSS, JavaScript."
+  flow:"Client logs in → API validates credentials → JWT is issued → Token is sent on protected requests.",
+  decode:"Decoding helps understand what data is stored in the token. Never trust it client-side.",
+  401:"401 means Unauthorized. The token is missing, invalid or expired."
 };
 
 function toggleChat(){
@@ -15,46 +13,12 @@ function toggleChat(){
 }
 
 function ask(key){
-  addUserMessage(key);
-  setTimeout(() => addBotMessage(answers[key]), 500);
+  addBot(answers[key]);
 }
 
-function addUserMessage(text){
+function addBot(text){
   const div = document.createElement("div");
-  div.className = "msg user pop";
-  div.style.color = "#22c55e";
-  div.textContent = label(text);
+  div.className = "msg bot";
+  div.textContent = text;
   chatWindow.appendChild(div);
-  scroll();
-}
-
-function addBotMessage(text){
-  const div = document.createElement("div");
-  div.className = "msg bot typing";
-  chatWindow.appendChild(div);
-  scroll();
-
-  let i = 0;
-  const interval = setInterval(() => {
-    div.textContent += text[i];
-    i++;
-    if(i >= text.length){
-      clearInterval(interval);
-      div.classList.remove("typing");
-      div.classList.add("pop");
-    }
-  }, 25);
-}
-
-function label(key){
-  return {
-    jwt:"What is JWT?",
-    login:"How does login work?",
-    security:"Is this secure?",
-    stack:"Which technologies?"
-  }[key];
-}
-
-function scroll(){
-  chatWindow.scrollTop = chatWindow.scrollHeight;
 }
